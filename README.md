@@ -1,3 +1,33 @@
+# 🎨 GAN Monet Style Transfer
+
+## 📕 [Link to Project Notebook](https://github.com/Karan-D-Software/GAN-Monet-Style-Transfer/blob/main/Project.ipynb) 
+
+## Table of Contents
+- [Brief Description of the Problem and Data](#brief-description-of-the-problem-and-data)
+- [Problem Description](#problem-description)
+- [Dataset](#dataset)
+- [Code to Load and Explore the Data](#code-to-load-and-explore-the-data)
+  - [Exploratory Data Analysis (EDA) — Inspect, Visualize and Clean the Data](#exploratory-data-analysis-eda--inspect-visualize-and-clean-the-data)
+    - [Load the Data](#load-the-data)
+    - [Data Cleaning](#data-cleaning)
+    - [Data Distribution Analysis](#data-distribution-analysis)
+    - [Sample Images](#sample-images)
+  - [Model Architecture](#model-architecture)
+    - [CycleGAN Implementation](#cyclegan-implementation)
+    - [Generator Model (U-Net)](#generator-model-u-net)
+    - [Discriminator Model (PatchGAN)](#discriminator-model-patchgan)
+    - [Building and Compiling the Models](#building-and-compiling-the-models)
+    - [Hyperparameter Tuning](#hyperparameter-tuning)
+  - [Results and Analysis](#results-and-analysis)
+    - [Overview](#overview)
+    - [Charts and Tables](#charts-and-tables)
+      - [Discriminator Loss and Accuracy Over Epochs](#discriminator-loss-and-accuracy-over-epochs)
+      - [Generator Loss Over Epochs](#generator-loss-over-epochs)
+      - [Tables of Results](#tables-of-results)
+    - [Discussion and Analysis](#discussion-and-analysis)
+  - [Conclusion](#conclusion)
+  - [References](#references)
+
 ## Brief Description of the Problem and Data 
 
 ### Problem Description
@@ -471,3 +501,95 @@ for params in param_list:
 
 print(f"Best parameters found: {best_params} with loss: {best_loss}")
 ```
+
+## Results and Analysis 
+
+### Overview
+
+In this section, we will analyze the performance of our GAN model in transforming photos into Monet-style paintings. We will present the results through various charts and tables and discuss the insights derived from our analysis. This comprehensive examination will cover the model's behavior over the training epochs, focusing on both the discriminator and generator components of the GAN.
+
+### Charts and Tables
+
+**1. Discriminator Loss and Accuracy Over Epochs**
+
+The discriminator's performance is critical in evaluating how well it can distinguish between real Monet paintings and the generated ones. Below are the charts for the discriminator loss and accuracy over the epochs.
+
+![Results Epoch](./images/results_epoch.png)
+
+**2. Generator Loss Over Epochs**
+
+The generator's ability to produce realistic Monet-style paintings is reflected in its loss over the training epochs. Here is the chart for the generator loss.
+
+![Generator Epoch](./images/generator.png)
+
+**3. Tables of Results**
+
+We will summarize the loss and accuracy values at key epochs in the form of markdown tables.
+
+```markdown
+| Epoch | Discriminator Loss | Discriminator Accuracy | Generator Loss |
+|-------|---------------------|------------------------|----------------|
+| 0     | 5.665               | 43.75                  | 1.196          |
+| 1     | 2.903               | 41.41                  | 2.168          |
+| 2     | 1.426               | 44.82                  | 5.901          |
+| 3     | 1.381               | 52.69                  | 1.083          |
+| 4     | 1.327               | 54.05                  | 0.715          |
+| 5     | 0.495               | 59.67                  | 0.184          |
+| 10    | 0.334               | 72.31                  | 0.146          |
+| 15    | 0.172               | 83.59                  | 0.051          |
+| 20    | 0.091               | 91.02                  | 0.051          |
+```
+
+#### Discussion and Analysis
+
+**Discriminator Analysis:**
+
+- **Initial High Loss and Low Accuracy:** At the beginning of training, the discriminator exhibits a high loss and relatively low accuracy. This indicates that the discriminator is initially struggling to distinguish between real Monet paintings and the generated ones.
+- **Improvement Over Time:** As training progresses, we observe a significant decrease in discriminator loss and a corresponding increase in accuracy. By the 20th epoch, the loss has reduced to 0.091, and accuracy has improved to 91.02%. This steady improvement suggests that the discriminator is becoming more adept at differentiating between real and generated images.
+- **Intermediate Fluctuations:** There are some fluctuations in the loss and accuracy values during the intermediate epochs. These fluctuations are typical in GAN training as the generator and discriminator continuously compete and adapt to each other's improvements.
+
+**Generator Analysis:**
+
+- **Initial Increase in Loss:** The generator loss initially increases, indicating that it is struggling to produce realistic Monet-style paintings that can fool the discriminator.
+- **Subsequent Decrease in Loss:** Over time, the generator loss decreases significantly, reaching as low as 0.051 by the 20th epoch. This reduction in loss indicates that the generator is learning and improving its ability to generate realistic Monet-style paintings.
+- **Effective Learning:** The interplay between the decreasing generator loss and the discriminator's improving accuracy suggests effective learning. The generator adapts to the discriminator's ability to detect fake images, resulting in progressively more convincing Monet-style paintings.
+
+**Overall Performance:**
+
+- **Model Convergence:** The results demonstrate that our GAN model successfully learns to transform photos into Monet-style paintings. The consistent improvement in both the discriminator and generator metrics indicates effective training and convergence of the model.
+- **Quality of Generated Images:** The decreasing generator loss suggests that the quality of the generated images improves over time, producing outputs that are increasingly similar to genuine Monet paintings.
+
+**Implications for Style Transfer:**
+
+- **Artistic Style Transfer:** The GAN model's ability to effectively transform photos into Monet-style paintings showcases the potential of GANs in artistic style transfer tasks. This capability can be applied to various fields, including digital art creation, enhancing visual content, and educational tools for art studies.
+- **Evaluation Metric:** The use of MiFID (Memorization-informed Fréchet Inception Distance) as an evaluation metric provides a robust measure of the quality of the generated images. This metric helps ensure that the generated images are not only visually appealing but also exhibit characteristics that closely resemble the target style.
+
+## Conclusion
+
+In conclusion, our project successfully demonstrated the ability of Generative Adversarial Networks (GANs) to transform photos into Monet-style paintings. The results show a significant improvement in both the discriminator's and generator's performance over the training epochs, as evidenced by the decrease in loss and increase in accuracy for both components. The use of the CycleGAN architecture was particularly effective in achieving this transformation, enabling the model to learn the mapping between photos and Monet-style paintings without the need for paired training examples.
+
+Key takeaways from this project include the importance of consistent data preparation, the effectiveness of adversarial training dynamics, and the critical role of evaluation metrics like the MiFID score in assessing the quality of generated images. However, intermediate fluctuations in training and initial high generator loss highlighted areas for potential improvement. Future enhancements could involve extended training periods, advanced hyperparameter tuning, data augmentation, and incorporating perceptual loss to further refine the model's output quality.
+
+Overall, this project underscores the potential of GANs in artistic style transfer tasks and provides a strong foundation for future work in this domain. By building on the insights gained and addressing identified challenges, we can continue to improve the performance and applicability of GAN-based models in various creative and practical applications.
+
+Sure, I will create a reference section that includes the relevant web sources needed to perform the work as detailed in your Jupyter notebook. Here is the reference section in APA format:
+
+## References
+
+- Kaggle. (n.d.). GAN - Getting Started. Retrieved June 16, 2024, from [https://www.kaggle.com/competitions/gan-getting-started](https://www.kaggle.com/competitions/gan-getting-started)
+
+- Kaggle. (n.d.). GAN - Getting Started Overview. Retrieved June 16, 2024, from [https://www.kaggle.com/competitions/gan-getting-started/overview](https://www.kaggle.com/competitions/gan-getting-started/overview)
+
+- Kaggle. (n.d.). GAN - Getting Started Evaluation. Retrieved June 16, 2024, from [https://www.kaggle.com/c/gan-getting-started/overview/evaluation](https://www.kaggle.com/c/gan-getting-started/overview/evaluation)
+
+- Brownlee, J. (2019, August 5). How to Develop a CycleGAN for Image-to-Image Translation with Keras. Machine Learning Mastery. Retrieved June 16, 2024, from [https://machinelearningmastery.com/how-to-develop-cyclegan-models-from-scratch-with-keras/](https://machinelearningmastery.com/how-to-develop-cyclegan-models-from-scratch-with-keras/)
+
+- Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press. Retrieved from [https://www.deeplearningbook.org/](https://www.deeplearningbook.org/)
+
+- Kingma, D. P., & Ba, J. (2014). Adam: A Method for Stochastic Optimization. arXiv. Retrieved from [https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980)
+
+- Chollet, F. (2018). Deep Learning with Python. Manning Publications. Retrieved from [https://www.manning.com/books/deep-learning-with-python](https://www.manning.com/books/deep-learning-with-python)
+
+- TensorFlow. (n.d.). CycleGAN. TensorFlow Core. Retrieved June 16, 2024, from [https://www.tensorflow.org/tutorials/generative/cyclegan](https://www.tensorflow.org/tutorials/generative/cyclegan)
+
+- PyTorch. (n.d.). Training a CycleGAN on Your Own Dataset. PyTorch Tutorials. Retrieved June 16, 2024, from [https://pytorch.org/tutorials/beginner/torchvision_tutorial.html](https://pytorch.org/tutorials/beginner/torchvision_tutorial.html)

@@ -2,3 +2,7 @@ monet_jpg
 monet_tfrec
 photo_jpg
 photo_tfrec
+best_D_A_model.h5
+best_D_B_model.h5
+best_G_A_model.h5
+best_G_B_model.h5
